@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de Cursos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de Estudiante</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/est/editarEst/{{Estudiante.idest}}" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtNombre" name="txtNombre" value="{{Estudiante.nombre}}{{Estudiante.idest}}" class="form-control" placeholder="nombre"
+                            maxlength="6" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtPaterno" name="txtPaterno" value="{{Estudiante.paterno}}" class="form-control" placeholder="paterno"
+                            maxlength="50" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtMaterno" name="txtMaterno" value="{{Estudiante.materno}}" class="form-control" placeholder="materno"
+                        maxlength="50" >
+                    </div>
+                    <div>
+                        <select name="txtCurso" id="txtCurso"  class="form-control">
+                            <option value="" selected>{{Estudiante.idcur}}</option>
+                            {% for op in curso %}
+                            <option  value={{op.codigo}} >{{op.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
