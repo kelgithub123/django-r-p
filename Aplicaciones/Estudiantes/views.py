@@ -6,13 +6,15 @@ from django.contrib import messages
 
 def homeEst(request):
     EstudListados = Estudiante.objects.all()
+    cursos=Curso.objects.all()
     messages.success(request, '¡Estudiantes del curso!')
     return render(request, "gestionEst.html", {"Estudiantes": EstudListados, "cursos":cursos})
 
 def ListaEstCurso(request,codigo):
+    cursos=Curso.objects.all()
     EstudListados = Estudiante.objects.filter(idcur=codigo)
     messages.success(request, '¡Estudiantes del curso!')
-    return render(request, "gestionEst.html", {"Estudiantes": EstudListados})
+    return render(request, "gestionEst.html", {"Estudiantes": EstudListados, "cursos":cursos})
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
@@ -22,7 +24,7 @@ def registrarEst(request):
     
     estudiante = Estudiante.objects.create(idcur=idcurso,nombre=nom,paterno=pat,materno=mat)
     messages.success(request, 'Estudiante registrado!')
-    return redirect('/est')
+    return redirect('/est/listaCurso/'+str(idcurso.codigo))
 
 def edicionEst(request, codigo):
     cursos = Curso.objects.all()
@@ -44,11 +46,11 @@ def editarEst(request,idest):
 
     messages.success(request, '¡Datos actualizados!')
 
-    return redirect('/est')
+    return redirect('../listaCurso/'+str(idcurso.codigo))
 
 def eliminarEst(request,codigo):
     Est = Estudiante.objects.get(idest=codigo)
-    curso = Est.idcur
+    idcurso = Est.idcur
     Est.delete()
     messages.success(request, '¡Estudiante eliminado!')
-    return redirect('/est')
+    return redirect('/est/listaCurso/'+str(idcurso.codigo))

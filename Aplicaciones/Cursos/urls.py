@@ -7,6 +7,5 @@ urlpatterns = [
     path('registrarCurso/', views.registrarCurso),
     path('edicionCurso/<codigo>', views.edicionCurso),
     path('editarCurso/', views.editarCurso),
-    path('eliminarCurso/<codigo>', views.eliminarCurso),
-    path('est/<codigo>',include('Aplicaciones.Estudiantes.urls'))
+    path('eliminarCurso/<codigo>', views.eliminarCurso)
 ]

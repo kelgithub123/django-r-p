@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from ..Cursos.models import * 
 
 # Create your models here.
@@ -11,4 +12,14 @@ class Estudiante(models.Model):
 
     def __str__(self):
         texto = "{0} ({1})"
-        return texto.format(self.nom, self.pat)
+        return texto.format(self.nombre, self.paterno)
+
+class ListaAsistencias(models.Model):
+    idasist=models.AutoField(primary_key=True)
+    idest4lista=models.ForeignKey(Estudiante,on_delete=models.DO_NOTHING)
+    fecha=models.DateTimeField(default=timezone.now, editable=False)
+    permisos=models.CharField(max_length=1)
+
+    def __str__(self):
+        texto = "{0} ({1}) {2}"
+        return texto.format(self.idasist, self.idest4lista.idest,self.fecha)
