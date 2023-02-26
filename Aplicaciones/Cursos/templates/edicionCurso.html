@@ -8,7 +8,11 @@
         <h2>Edición de Curso</h2>
         <div class="card">
             <div class="card-body">
+<<<<<<< HEAD
                 <form action="../editarCurso/" method="POST">{% csrf_token %}
+=======
+                <form action="/editarCurso/" method="POST">{% csrf_token %}
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
                     <div class="form-group">
                         <input type="text" id="txtCodigo" name="txtCodigo" value="{{curso.codigo}}" class="form-control" placeholder="Código"
                             minlength="6" maxlength="6" readonly required>
