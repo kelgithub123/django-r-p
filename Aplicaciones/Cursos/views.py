@@ -8,7 +8,6 @@ def home(request):
     messages.success(request, '¡Cursos listados!')
     return render(request, "gestionCursos.html", {"cursos": cursosListados})
 
-
 def registrarCurso(request):    
     nombre = request.POST['txtNombre']
     creditos = request.POST['numCreditos']
@@ -18,7 +17,6 @@ def registrarCurso(request):
     messages.success(request, '¡Curso registrado!')
     return redirect('/')
 
-
 def edicionCurso(request, codigo):
     curso = Curso.objects.get(codigo=codigo)
     return render(request, "edicionCurso.html", {"curso": curso})
@@ -27,18 +25,14 @@ def editarCurso(request):
     codigo = request.POST['txtCodigo']
     nombre = request.POST['txtNombre']
     creditos = request.POST['numCreditos']
-
     curso = Curso.objects.get(codigo=codigo)
     curso.nombre = nombre
     curso.creditos = creditos
     curso.save()
-
     messages.success(request, '¡Curso actualizado!')
-
     return redirect('/')
 
-
-def eliminarCurso(request, codigo):
+def eliminarCurso(request,codigo):
     curso = Curso.objects.get(codigo=codigo)
     curso.delete()
     messages.success(request, '¡Curso eliminado!')

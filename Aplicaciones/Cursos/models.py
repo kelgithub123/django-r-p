@@ -7,6 +7,5 @@ class Curso(models.Model):
     creditos = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        # texto = "{0} "
         texto = "{0}{1}"
         return texto.format(self.codigo,self.nombre)

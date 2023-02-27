@@ -16,7 +16,7 @@ class Estudiante(models.Model):
 
 class ListaAsistencias(models.Model):
     idasist=models.AutoField(primary_key=True)
-    idest4lista=models.ForeignKey(Estudiante,on_delete=models.DO_NOTHING)
+    idest4lista=models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     fecha=models.DateTimeField(default=timezone.now, editable=False)
     permisos=models.CharField(max_length=1)
 
