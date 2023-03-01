@@ -14,7 +14,11 @@ def ListaEstCurso(request,codigo):
     cursos=Curso.objects.all()
     EstudListados = Estudiante.objects.filter(idcur=codigo)
     messages.success(request, '¡Estudiantes del curso!')
-    return render(request, "gestionEst.html", {"Estudiantes": EstudListados, "cursos":cursos})
+    return render(request, "gestionEst.html", {"Estudiantes": EstudListados, "cursos":cursos, "curso":codigo})
+
+def registro(request,curso):
+    EstudListados = Estudiante.objects.filter(idcur=curso)
+    return render(request, "RegistroEst.html",{"Estudiantes": EstudListados})
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
