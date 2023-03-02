@@ -8,9 +8,15 @@
         <h2>Edición de Estudiante</h2>
         <div class="card">
             <div class="card-body">
+<<<<<<< HEAD
                 <form action="../editarEst/{{Estudiante.idest}}" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="txtNombre" name="txtNombre" value="{{Estudiante.nombre}}" class="form-control" placeholder="nombre"
+=======
+                <form action="/est/editarEst/{{Estudiante.idest}}" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtNombre" name="txtNombre" value="{{Estudiante.nombre}}{{Estudiante.idest}}" class="form-control" placeholder="nombre"
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
                             maxlength="6" >
                     </div>
                     <div class="form-group">
@@ -23,11 +29,17 @@
                     </div>
                     <div>
                         <select name="txtCurso" id="txtCurso"  class="form-control">
+<<<<<<< HEAD
                             <option value="{{Estudiante.idcur.codigo}}" selected>{{Estudiante.idcur.nombre}}</option>
                             {% for op in curso %}
                             {% if op.nombre != Estudiante.idcur.nombre %}
                             <option  value={{op.codigo}} >{{op.nombre}}</option>
                             {% endif %}
+=======
+                            <option value="" selected>{{Estudiante.idcur}}</option>
+                            {% for op in curso %}
+                            <option  value={{op.codigo}} >{{op.nombre}}</option>
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
                             {% endfor %}
                         </select>
                     </div>

@@ -15,7 +15,11 @@
         <h2>Gestión de Estudiantes</h2>
         <div class="card">
             <div class="card-body">
+<<<<<<< HEAD
                 <form action="../registrarEst/" method="POST">{% csrf_token %}
+=======
+                <form action="registrarEst/" method="POST">{% csrf_token %}
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
                     <div class="form-group">
                         <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre"
                             maxlength="15" required>
@@ -44,10 +48,14 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+<<<<<<< HEAD
         <h1>Listado de Estudiantes 
             <span><a href="../Registro/{{curso}}"><button class="btn btn-danger">LISTA</button></a></span>
             <span><a href=""><button class="btn btn-primary">REGISTRO</button></a></span>
         </h1>
+=======
+        <h1>Listado de Estudiantes</h1>
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
         <div class="table-responsive py-2">
             <table class="table table-striped">
                 <thead>
@@ -64,12 +72,21 @@
                     {% for c in Estudiantes %}
                     <tr>
                         <td>{{forloop.counter}}</td>
+<<<<<<< HEAD
                         <td>{{c.nombre}}</td>
                         <td>{{c.paterno}}</td>
                         <td>{{c.materno}}</td>
                         <td>{{c.idcur.nombre}}</td>
                         <td><a href="../edicionEst/{{c.idest}}" class="btn btn-info">Editar</a></td>
                         <td><a href="../eliminarEst/{{c.idest}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+=======
+                        <td>{{c.nombre}}{{c.idest}}</td>
+                        <td>{{c.paterno}}</td>
+                        <td>{{c.materno}}</td>
+                        <td>{{c.idcur}}</td>
+                        <td><a href="edicionEst/{{c.idest}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarEst/{{c.idest}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
                     </tr>
                     {% endfor %}
                 </tbody>

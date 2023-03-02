@@ -1,5 +1,8 @@
 from django.db import models
+<<<<<<< HEAD
 from django.utils import timezone
+=======
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
 from ..Cursos.models import * 
 
 # Create your models here.
@@ -12,6 +15,7 @@ class Estudiante(models.Model):
 
     def __str__(self):
         texto = "{0} ({1})"
+<<<<<<< HEAD
         return texto.format(self.nombre, self.paterno)
 
 class ListaAsistencias(models.Model):
@@ -23,3 +27,6 @@ class ListaAsistencias(models.Model):
     def __str__(self):
         texto = "{0} ({1}) {2}"
         return texto.format(self.idasist, self.idest4lista.idest,self.fecha)
+=======
+        return texto.format(self.nom, self.pat)
+>>>>>>> 7963514e59fe1158b073527349fd15b8e4aad62f
