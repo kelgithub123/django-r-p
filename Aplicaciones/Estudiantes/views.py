@@ -69,4 +69,4 @@ def eliminarEst(request,codigo):
     curso = Est.idcur
     Est.delete()
     messages.success(request, '¡Estudiante eliminado!')
-    return redirect('/est/ListaEstCurso/'+ str(curso))
+    return redirect('/est/ListaEstCurso/'+ str(curso.codigo))
