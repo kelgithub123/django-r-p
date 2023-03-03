@@ -18,7 +18,10 @@ def ListaEstCurso(request,codigo):
 
 def registro(request,curso):
     EstudListados = Estudiante.objects.filter(idcur=curso)
-    return render(request, "RegistroEst.html",{"Estudiantes": EstudListados})
+    return render(request, "gestionEst.html", {"Estudiantes": EstudListados, "cursos":cursos})
+    EstudListados = Estudiante.objects.filter(idcur=codigo)
+    messages.success(request, '¡Estudiantes del curso!')
+    return render(request, "gestionEst.html", {"Estudiantes": EstudListados})
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
@@ -28,6 +31,7 @@ def registrarEst(request):
     
     estudiante = Estudiante.objects.create(idcur=idcurso,nombre=nom,paterno=pat,materno=mat)
     messages.success(request, 'Estudiante registrado!')
+
     return redirect('/est/listaCurso/'+str(idcurso.codigo))
 
 def edicionEst(request, codigo):
@@ -58,3 +62,11 @@ def eliminarEst(request,codigo):
     Est.delete()
     messages.success(request, '¡Estudiante eliminado!')
     return redirect('/est/listaCurso/'+str(idcurso.codigo))
+
+
+def eliminarEst(request,codigo):
+    Est = Estudiante.objects.get(idest=codigo)
+    curso = Est.idcur
+    Est.delete()
+    messages.success(request, '¡Estudiante eliminado!')
+    return redirect('/est/ListaEstCurso/'+ str(curso))
