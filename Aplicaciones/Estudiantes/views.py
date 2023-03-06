@@ -1,5 +1,6 @@
+import datetime
 from django.shortcuts import render,redirect
-from .models import Estudiante
+from .models import Estudiante,ListaAsistencias,Notas,Actividades
 from ..Cursos.models import Curso
 from django.contrib import messages
 # Create your views here.
@@ -18,14 +19,15 @@ def ListaEstCurso(request,codigo):
 
 def registro(request,curso):
     EstudListados = Estudiante.objects.filter(idcur=curso)
-    return render(request, "RegistroEst.html",{"Estudiantes": EstudListados})
+    fecha=datetime.date.today()
+    Asistencias=ListaAsistencias.objects.filter(fechaAsist=fecha)
+    return render(request, "RegistroEst.html",{"Estudiantes": EstudListados,"Asistentes":Asistencias})
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
     pat = request.POST['txtPaterno']
     mat = request.POST['txtMaterno']
     idcurso = Curso.objects.get(codigo=request.POST['txtCurso'])
-    
     estudiante = Estudiante.objects.create(idcur=idcurso,nombre=nom,paterno=pat,materno=mat)
     messages.success(request, 'Estudiante registrado!')
     return redirect('/est/listaCurso/'+str(idcurso.codigo))
@@ -40,16 +42,13 @@ def editarEst(request,idest):
     pat = request.POST['txtPaterno']
     mat = request.POST['txtMaterno']
     idcurso = Curso.objects.get(codigo=request.POST['txtCurso'])
-
     Est = Estudiante.objects.get(idest=idest)
     Est.nombre = nom
     Est.paterno = pat
     Est.materno = mat
     Est.idcur=idcurso
     Est.save()
-
     messages.success(request, '¡Datos actualizados!')
-
     return redirect('../listaCurso/'+str(idcurso.codigo))
 
 def eliminarEst(request,codigo):
@@ -58,3 +57,10 @@ def eliminarEst(request,codigo):
     Est.delete()
     messages.success(request, '¡Estudiante eliminado!')
     return redirect('/est/listaCurso/'+str(idcurso.codigo))
+
+def registrarAsist(request,idest,valor):
+    Est = Estudiante.objects.get(idest=idest)
+    idcurso = str(Est.idcur.codigo)
+    messages.success(request, 'asistencia registrada')
+    Asist = ListaAsistencias.objects.create(idestAsist=Est,valorAsist=valor)
+    return redirect('/est/Registro/'+str(idcurso))

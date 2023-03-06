@@ -1,3 +1,5 @@
+var message_ele = document.getElementById("message_container");
+
 (function () {
 
     const btnEliminacion = document.querySelectorAll(".btnEliminacion");
@@ -11,4 +13,9 @@
         });
     });
     
-})();
+}
+);
+
+setTimeout(function(){ 
+   message_ele.style.display = "none"; 
+}, 3000);
