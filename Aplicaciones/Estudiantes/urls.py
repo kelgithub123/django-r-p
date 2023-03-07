@@ -9,5 +9,6 @@ urlpatterns = [
     path('registrarEst/', views.registrarEst),
     path('editarEst/<idest>', views.editarEst),
     path('Registro/<curso>', views.registro),
+    path('Asistencia/<idest>/<valor>', views.registrarAsist),
     path('eliminarEst/<codigo>', views.eliminarEst)
 ]
