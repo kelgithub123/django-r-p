@@ -11,14 +11,7 @@
         </div>
         {% endfor %}
         {% endif %}
-        <h2>Asistencia
-        <span>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        registrar actividad
-        </button>      
-        </span>
-        </h2>
+        <h2>Asistencia</h2>
         <div class="table-responsive py-2">
             <table class="table table-striped">
                 <thead>
@@ -35,7 +28,6 @@
                         <td>{{c.idest}} {{c.nombre}} {{c.paterno}} {{c.materno}}</td>
                         <td><a href="../Asistencia/{{c.idest}}/{{1}}" class="btn btn-info" onclick="clickEnviar(this)">PRESENTE</a></td>
                         <td><a href="../Asistencia/{{c.idest}}/{{2}}" class="btn btn-warning">LICENCIA</a></td>
-                        <td><a href="../Asistencia/{{c.idest}}/{{0}}" class="btn btn-danger">FALTA</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -43,14 +35,28 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-6">
-        <h2>Actividades pedagogicas</h2>    
+        <h2>Actividades pedagogicas
+          <span>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            + 📑
+            </button>      
+            </span>
+          <span>
+            <select name="" id="">
+                <option value=""></option>
+            </select>
+          </span>   
+        </h2>
+         
         <div class="table-responsive py-2">
           <table class="table table-striped">
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>Asistencias</th>
-                      <th colspan="3">Acciones</th>
+                      <th>nombre</th>
+                      <th>puntaje</th>
+
                   </tr>
               </thead>
               <tbody>
@@ -58,7 +64,13 @@
                   <tr>
                       <td>{{forloop.counter}}</td>
                       <td>{{a.idestAsist.nombre}} {{a.idestAsist.paterno}} {{a.idestAsist.materno}}</td>
-
+                      <td><input type="text"> 
+                      <span>
+                      <input type="submit" value="💾">
+                      <input type="submit" value="🖊">
+                      <input type="submit" value="🗑">
+                      </span>
+                      </td>
                   </tr>
                   {% endfor %}
               </tbody>

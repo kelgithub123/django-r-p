@@ -24,7 +24,7 @@ def registro(request,curso):
     Listaest = []
     if not Asistencias:
         Listaest=EstudListados 
-        return render(request, "RegistroEst.html",{"Estudiantes": Listaest})
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias})
     else:
         for est in EstudListados:
             sw=0
@@ -34,7 +34,7 @@ def registro(request,curso):
                     sw=1
             if sw == 0:                       
                 Listaest.append(est) 
-        return render(request, "RegistroEst.html",{"Estudiantes": Listaest})    
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias})    
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
