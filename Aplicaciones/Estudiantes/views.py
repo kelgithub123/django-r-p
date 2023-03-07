@@ -21,7 +21,20 @@ def registro(request,curso):
     EstudListados = Estudiante.objects.filter(idcur=curso)
     fecha=datetime.date.today()
     Asistencias=ListaAsistencias.objects.filter(fechaAsist=fecha)
-    return render(request, "RegistroEst.html",{"Estudiantes": EstudListados,"Asistentes":Asistencias})
+    Listaest = []
+    if not Asistencias:
+        Listaest=EstudListados 
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest})
+    else:
+        for est in EstudListados:
+            sw=0
+            id=est.idest
+            for estAsist in Asistencias:
+                if estAsist.idestAsist.idest == id:
+                    sw=1
+            if sw == 0:                       
+                Listaest.append(est) 
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest})    
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
