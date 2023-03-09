@@ -74,6 +74,6 @@ def eliminarEst(request,codigo):
 def registrarAsist(request,idest,valor):
     Est = Estudiante.objects.get(idest=idest)
     idcurso = str(Est.idcur.codigo)
-    messages.success(request, 'asistencia registrada')
+    messages.success(request, 'registradO!!')
     Asist = ListaAsistencias.objects.create(idestAsist=Est,valorAsist=valor)
     return redirect('/est/Registro/'+str(idcurso))
