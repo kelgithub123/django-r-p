@@ -21,10 +21,11 @@ def registro(request,curso):
     EstudListados = Estudiante.objects.filter(idcur=curso)
     fecha=datetime.date.today()
     Asistencias=ListaAsistencias.objects.filter(fechaAsist=fecha)
+    actividadeslist=Actividades.objects.all()
     Listaest = []
     if not Asistencias:
         Listaest=EstudListados 
-        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias})
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias,"curso":curso,"actividades":actividadeslist})
     else:
         for est in EstudListados:
             sw=0
@@ -34,7 +35,7 @@ def registro(request,curso):
                     sw=1
             if sw == 0:                       
                 Listaest.append(est) 
-        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias})    
+        return render(request, "RegistroEst.html",{"Estudiantes": Listaest,"Asistentes":Asistencias,"curso":curso,"actividades":actividadeslist})    
 
 def registrarEst(request):
     nom = request.POST['txtNombre']
@@ -77,3 +78,27 @@ def registrarAsist(request,idest,valor):
     messages.success(request, 'registradO!!')
     Asist = ListaAsistencias.objects.create(idestAsist=Est,valorAsist=valor)
     return redirect('/est/Registro/'+str(idcurso))
+
+def registrarActividad(request,curso):
+    nombre = request.POST['Nombre']
+    consigna = request.POST['consigna']
+    fecha = request.POST['fecha']
+    Actividad = Actividades.objects.create(nombreAct=nombre, fechaAct=fecha, consignaAct=consigna)
+    messages.success(request, '¡Actividad registrada!')
+    return redirect('/est/Registro/'+str(curso))
+
+def mostraractividad(request,id):    
+    fecha=datetime.date.today()
+    Actividad = Actividades.objects.get(idact=id)
+    actividadeslist=Actividades.objects.all()
+    calificados=Notas.objects.exclude(idactNota=id)
+    Asistentes=ListaAsistencias.objects.filter(fechaAsist=fecha,valorAsist=1)
+    return render(request,'actividadesEst.html',{"actSel":Actividad,"Asistentes":Asistentes,"actividades":actividadeslist})
+
+def registrarnota(request):
+    nota = request.POST['nota']
+    estudiante = Estudiante.objects.get(idest=request.POST['idest'])
+    actividad = Actividades.objects.get(idact=request.POST['idact'])
+    Nota = Notas.objects.create(valorNota=nota,idestNota=estudiante,idActNota=actividad)
+    messages.success(request, 'nota registrada!')
+    return redirect('/est/Actividad/'+str(actividad.idact))

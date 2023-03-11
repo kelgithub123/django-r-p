@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+{% block body %}
+  {% if actSel %}
+  <div class="row" >
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-4">
+  <div>
+    <textarea class="form-control" name="" id="" cols="30" rows="10">{{actSel.consignaAct}}</textarea>
+  </div>
+  
+</div>
+<div class="col-sm-12 col-md-6 col-lg-4 col-xl-8">
+    <div class="table-responsive py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>nombre</th>
+                    <th>puntaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in Asistentes %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{a.idestAsist.nombre}} {{a.idestAsist.paterno}} {{a.idestAsist.materno}}</td>
+                    <td>
+                    <form action="../registrarNota/" method="post">{% csrf_token %}
+                        <input name="nota" type="number" required> 
+                        <input name="idact" type="hidden" value="{{actSel.idact}}" >
+                        <input name="idest" type="hidden" value="{{a.idestAsist.idest}}" >
+                        <span>
+                        <input type="submit" value="💾">
+                        <input type="submit" value="🖊">
+                        <input type="submit" value="🗑">
+                        </span>     
+                    </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+  </div>
+{% endif %}
+{% endblock %}  
