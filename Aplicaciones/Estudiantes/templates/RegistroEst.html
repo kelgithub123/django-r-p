@@ -27,7 +27,8 @@
                         <td>{{forloop.counter}}</td>
                         <td>{{c.idest}} {{c.nombre}} {{c.paterno}} {{c.materno}}</td>
                         <td><a href="../Asistencia/{{c.idest}}/{{1}}" class="btn btn-info" onclick="clickEnviar(this)">PRESENTE</a></td>
-                        <td><a href="../Asistencia/{{c.idest}}/{{2}}" class="btn btn-warning">LICENCIA</a></td>
+                        <td><a href="../Asistencia/{{c.idest}}/{{0}}" class="btn btn-info" onclick="clickEnviar(this)">FALTA</a></td>
+                        <td><a href="../Asistencia/{{c.idest}}/{{0.2}}" class="btn btn-warning" onclick="clickEnviar(this)">LICENCIA</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

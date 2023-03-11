@@ -20,7 +20,7 @@ class ListaAsistencias(models.Model):
     idAsist=models.AutoField(primary_key=True)
     idestAsist=models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     fechaAsist=models.DateField(default=fecha, editable=True)
-    valorAsist=models.PositiveSmallIntegerField(default=0)
+    valorAsist=models.FloatField(default=0)
 
     def __str__(self):
         texto = "{0} ({1}) {2}"
