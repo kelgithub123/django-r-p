@@ -36,7 +36,7 @@ class Actividades(models.Model):
 
 class Notas(models.Model):
     idnota=models.AutoField(primary_key=True)
-    idestNota=models.ForeignKey(Estudiante,on_delete=models.DO_NOTHING,default=None)
+    idestNota=models.ForeignKey(Estudiante,on_delete=models.CASCADE,default=None)
     idActNota=models.ForeignKey(Actividades,on_delete=models.CASCADE,default=None)
     valorNota=models.IntegerField()
     fechaNota=models.DateTimeField(default=timezone.now, editable=False)

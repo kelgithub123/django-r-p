@@ -87,13 +87,37 @@ def registrarActividad(request,curso):
     messages.success(request, '¡Actividad registrada!')
     return redirect('/est/Registro/'+str(curso))
 
+def filtradorNotas(id):
+        estudiantes = Estudiante.objects.all()
+        DatosDeTablas = Notas.objects.filter(idActNota=id)
+        ObjFiltrados = []    
+        for est in estudiantes:
+            sw=0
+            id=est.idest
+            for esttabla in DatosDeTablas:
+                if esttabla.idestNota.idest == id:
+                    sw=1
+            if sw == 0:                       
+                ObjFiltrados.append(est)
+        return ObjFiltrados
+
 def mostraractividad(request,id):    
     fecha=datetime.date.today()
     Actividad = Actividades.objects.get(idact=id)
     actividadeslist=Actividades.objects.all()
-    calificados=Notas.objects.exclude(idactNota=id)
-    Asistentes=ListaAsistencias.objects.filter(fechaAsist=fecha,valorAsist=1)
-    return render(request,'actividadesEst.html',{"actSel":Actividad,"Asistentes":Asistentes,"actividades":actividadeslist})
+    estfil=filtradorNotas(id)
+    return render(request,'actividadesEst.html',{"actSel":Actividad,"Estudiantes":estfil,"actividades":actividadeslist})
+
+def filtradorAsistencia(estudiantes,DatosDeTablas):
+        ObjFiltrados = []    
+        for est in estudiantes:
+            sw=0
+            id=est.idest
+            for estAsist in DatosDeTablas:
+                if estAsist.idestAsist.idest == id:
+                    sw=1
+            if sw == 0:                       
+                ObjFiltrados.append(est)
 
 def registrarnota(request):
     nota = request.POST['nota']

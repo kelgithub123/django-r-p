@@ -44,11 +44,26 @@
           </button>      
           </span>   
       </h2>
-      <ul>
-        {% for a in actividades %}  
-        <li><button class="btn btn-primary"><a href="../Actividad/{{a.idact}}" class="text-dark mg-2">{{a.nombreAct}}</a></button></li>
-        {% endfor %}
-      </ul>          
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ACTIVIDAD</th>
+            <th>FECHA</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for a in actividades %}
+            <tr>
+            <td>
+              <button class="btn btn-primary act"><a href="../Actividad/{{a.idact}}" class="text-dark mg-2">{{a.nombreAct}}</a></button>
+            </td>
+            <td>
+              {{a.fechaAct}}
+            </td>
+          </tr>              
+            {% endfor %}
+        </tbody>
+      </table>          
     </div>
 </div>
   <!-- Modal -->

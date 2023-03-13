@@ -19,15 +19,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% for a in Asistentes %}
+                {% for a in Estudiantes %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-                    <td>{{a.idestAsist.nombre}} {{a.idestAsist.paterno}} {{a.idestAsist.materno}}</td>
+                    <td>{{a.nombre}} {{a.paterno}} {{a.materno}}</td>
                     <td>
                     <form action="../registrarNota/" method="post">{% csrf_token %}
                         <input name="nota" type="number" required> 
                         <input name="idact" type="hidden" value="{{actSel.idact}}" >
-                        <input name="idest" type="hidden" value="{{a.idestAsist.idest}}" >
+                        <input name="idest" type="hidden" value="{{a.idest}}" >
                         <span>
                         <input type="submit" value="💾">
                         <input type="submit" value="🖊">
