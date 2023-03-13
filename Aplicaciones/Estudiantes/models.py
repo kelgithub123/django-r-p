@@ -21,7 +21,6 @@ class ListaAsistencias(models.Model):
     idestAsist=models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     fechaAsist=models.DateField(default=fecha, editable=True)
     valorAsist=models.FloatField(default=0)
-
     def __str__(self):
         texto = "{0} ({1}) {2}"
         return texto.format(self.idAsist, self.idestAsist.idest,self.valorAsist)
@@ -30,17 +29,18 @@ class Actividades(models.Model):
     idact=models.AutoField(primary_key=True)
     nombreAct=models.CharField(max_length=25)
     fechaAct=models.DateTimeField(editable=True)
-    
+    consignaAct=models.TextField(default='no instruida')
     def __str__(self):
         texto = "{0} ({1}) {2}"
         return texto.format(self.idact, self.nombreAct,self.fechaAct)
 
 class Notas(models.Model):
     idnota=models.AutoField(primary_key=True)
-    idAct=models.ForeignKey(Actividades,on_delete=models.CASCADE)
+    idestNota=models.ForeignKey(Estudiante,on_delete=models.CASCADE,default=None)
+    idActNota=models.ForeignKey(Actividades,on_delete=models.CASCADE,default=None)
     valorNota=models.IntegerField()
     fechaNota=models.DateTimeField(default=timezone.now, editable=False)
     
     def __str__(self):
         texto = "{0} ({1}) {2} {3}"
-        return texto.format(self.idnota, self.idAct,self.fechaNota, self.valorNota)
+        return texto.format(self.idnota, self.idActNota,self.fechaNota, self.valorNota)

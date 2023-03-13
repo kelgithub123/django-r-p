@@ -36,66 +36,62 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-6">
-        <h2>Actividades pedagogicas
-          <span>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + 📑
-            </button>      
-            </span>
-          <span>
-            <select name="" id="">
-                <option value=""></option>
-            </select>
+      <h2>Actividades pedagogicas
+        <span>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          + 📑
+          </button>      
           </span>   
-        </h2>
-         
-        <div class="table-responsive py-2">
-          <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>nombre</th>
-                      <th>puntaje</th>
-
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for a in Asistentes %}
-                  <tr>
-                      <td>{{forloop.counter}}</td>
-                      <td>{{a.idestAsist.nombre}} {{a.idestAsist.paterno}} {{a.idestAsist.materno}}</td>
-                      <td><input type="text"> 
-                      <span>
-                      <input type="submit" value="💾">
-                      <input type="submit" value="🖊">
-                      <input type="submit" value="🗑">
-                      </span>
-                      </td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-      </div>    
+      </h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ACTIVIDAD</th>
+            <th>FECHA</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for a in actividades %}
+            <tr>
+            <td>
+              <button class="btn btn-primary act"><a href="../Actividad/{{a.idact}}" class="text-dark mg-2">{{a.nombreAct}}</a></button>
+            </td>
+            <td>
+              {{a.fechaAct}}
+            </td>
+          </tr>              
+            {% endfor %}
+        </tbody>
+      </table>          
     </div>
 </div>
-
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">ACTIVIDAD</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <form action="../registrarAct/{{curso}}" method="POST">{% csrf_token %}                    
+            <div class="form-group">
+                <input type="text" id="nombre" name="Nombre" class="form-control" placeholder="Nombre"
+                    maxlength="50" required>
+            </div>
+            <div class="form-group">
+              <textarea name="consigna" id="" class="form-control"></textarea>
+          </div>
+            <div class="form-group">
+                <input type="date" id="fecha" name="fecha" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar Actividad</button>
+            </div>
+        </form>
         </div>
       </div>
     </div>
