@@ -18,12 +18,18 @@ class ListaAsistencias(models.Model):
     fecha=datetime.date.today()
     format = fecha.strftime('%Y'+'-'+'%m'+'-'+'%d')
     idAsist=models.AutoField(primary_key=True)
+    ideCurAsist=models.ForeignKey(Curso,default=None,on_delete=models.CASCADE,editable=True)
     idestAsist=models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     fechaAsist=models.DateField(default=fecha, editable=True)
     valorAsist=models.FloatField(default=0)
     def __str__(self):
-        texto = "{0} ({1}) {2}"
-        return texto.format(self.idAsist, self.idestAsist.idest,self.valorAsist)
+        texto = "{0} ({1}) {2} {3}"
+        return texto.format(self.idAsist, self.idestAsist,self.valorAsist, self.ideCurAsist)
+
+# class asistencia():
+#     id=models.AutoField(models.Model)
+#     fecha=models.models.DateTimeField(editable=True)
+#     curso=models.ForeignKey(Curso,on_delete=models.CASCADE)
 
 class Actividades(models.Model):
     idact=models.AutoField(primary_key=True)
