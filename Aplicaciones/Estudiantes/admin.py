@@ -3,7 +3,7 @@ from .models import Estudiante,ListaAsistencias,Notas,Actividades
 # Register your models here.
 
 class formato(admin.ModelAdmin):
-    fields = ['idestAsist','fechaAsist','valorAsist']
+    fields = ['idestAsist','fechaAsist','valorAsist','ideCurAsist']
 
 admin.site.register(Estudiante)
 admin.site.register(ListaAsistencias,formato)

@@ -72,11 +72,12 @@ def eliminarEst(request,codigo):
     messages.success(request, '¡Estudiante eliminado!')
     return redirect('/est/listaCurso/'+str(idcurso.codigo))
 
-def registrarAsist(request,idest,valor):
+def registrarAsist(request,idest,valor,curso):
     Est = Estudiante.objects.get(idest=idest)
     idcurso = str(Est.idcur.codigo)
+    curso=Curso.objects.get(codigo=curso)
     messages.success(request, 'registradO!!')
-    Asist = ListaAsistencias.objects.create(idestAsist=Est,valorAsist=valor)
+    Asist = ListaAsistencias.objects.create(idestAsist=Est,valorAsist=valor,ideCurAsist=curso)
     return redirect('/est/Registro/'+str(idcurso))
 
 def registrarActividad(request,curso):
@@ -126,3 +127,11 @@ def registrarnota(request):
     Nota = Notas.objects.create(valorNota=nota,idestNota=estudiante,idActNota=actividad)
     messages.success(request, 'nota registrada!')
     return redirect('/est/Actividad/'+str(actividad.idact))
+
+
+
+def verlistaAsistencia(request,curso):
+    estudiantes = Estudiante.objects.filter(idcur=curso)
+    asistencias=ListaAsistencias.objects.all()
+    fechas = ListaAsistencias.objects.filter(fechaAsist__gt="1990-05-09").values("fechaAsist").distinct()
+    return render(request,'listaAsistencia.html',{"Estudiantes":estudiantes,"lista":asistencias,"fecha":fechas})
