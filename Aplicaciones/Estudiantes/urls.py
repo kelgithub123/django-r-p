@@ -12,6 +12,7 @@ urlpatterns = [
     path('Actividad/<id>', views.mostraractividad),
     path('registrarAct/<curso>', views.registrarActividad),
     path('registrarNota/', views.registrarnota),
-    path('Asistencia/<idest>/<valor>', views.registrarAsist),
+    path('listaDeAsistencia/<curso>', views.verlistaAsistencia),
+    path('Asistencia/<idest>/<valor>/<curso>', views.registrarAsist),
     path('eliminarEst/<codigo>', views.eliminarEst)
 ]
